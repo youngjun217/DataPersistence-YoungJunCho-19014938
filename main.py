@@ -81,7 +81,7 @@ def reset_db(repo: OrderRepository) -> None:
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser(description="DataPersistence PoC")
-    parser.add_argument("--reset", action="store_true", help="데모 실행 후 데이터 초기화")
+    parser.add_argument("--reset", action="store_true", default=True, help="데모 실행 후 데이터 초기화 (기본: 활성화)")
     args = parser.parse_args()
 
     try:
