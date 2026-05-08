@@ -68,5 +68,11 @@ class OrderRepository:
     def find_by_status(self, status: OrderStatus) -> List[Order]:
         return [o for o in self.find_all() if o.status == status]
 
+    def count_by_status(self) -> dict:
+        counts = {s.value: 0 for s in OrderStatus}
+        for o in self.find_all():
+            counts[o.status.value] += 1
+        return counts
+
     def count(self) -> int:
         return len(self._read())
