@@ -77,7 +77,10 @@ if __name__ == "__main__":
     parser.add_argument("--reset", action="store_true", help="데모 실행 후 데이터 초기화")
     args = parser.parse_args()
 
-    repo = OrderRepository(db_path="data/orders.json")
-    demo_crud(repo)
-    if args.reset:
-        reset_db(repo)
+    try:
+        repo = OrderRepository(db_path="data/orders.json")
+        demo_crud(repo)
+        if args.reset:
+            reset_db(repo)
+    except KeyboardInterrupt:
+        print("\n\n중단되었습니다.")
