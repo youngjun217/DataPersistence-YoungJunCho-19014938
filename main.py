@@ -65,6 +65,19 @@ def demo_crud(repo: OrderRepository) -> None:
     print("=" * 50)
 
 
+def reset_db(repo: OrderRepository) -> None:
+    for order in repo.find_all():
+        repo.delete(order.id)
+    print("\n[정리] 데모 데이터를 초기화했습니다.")
+
+
 if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser(description="DataPersistence PoC")
+    parser.add_argument("--reset", action="store_true", help="데모 실행 후 데이터 초기화")
+    args = parser.parse_args()
+
     repo = OrderRepository(db_path="data/orders.json")
     demo_crud(repo)
+    if args.reset:
+        reset_db(repo)
