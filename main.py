@@ -66,12 +66,11 @@ def demo_crud(repo: OrderRepository) -> None:
     print(f"  -> 삭제 {'성공' if deleted else '실패'}")
     print(f"  -> 남은 주문 수: {repo.count()}건")
 
-    from collections import Counter
-    all_orders = repo.find_all()
-    status_counts = Counter(o.status.value for o in all_orders)
-    print(f"\n[상태별 요약]")
-    for s, c in sorted(status_counts.items()):
-        print(f"  {s:<12} : {c}건")
+    print(f"\n[COUNT BY STATUS] count_by_status() 메서드 활용")
+    counts = repo.count_by_status()
+    for s, c in sorted(counts.items()):
+        if c > 0:
+            print(f"  {s:<12} : {c}건")
 
     print("\n[완료] orders.json 파일을 확인하세요.")
     print("=" * 50)
