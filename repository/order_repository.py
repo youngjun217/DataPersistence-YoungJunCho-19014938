@@ -65,5 +65,8 @@ class OrderRepository:
         self._write(filtered)
         return True
 
+    def find_by_status(self, status: OrderStatus) -> List[Order]:
+        return [o for o in self.find_all() if o.status == status]
+
     def count(self) -> int:
         return len(self._read())
