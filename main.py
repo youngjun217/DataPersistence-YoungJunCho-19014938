@@ -49,6 +49,10 @@ def demo_crud(repo: OrderRepository) -> None:
     if found:
         print(f"  -> {found.customer_name}, 총 {found.total_price:,.0f}원")
 
+    print(f"\n[READ ONE] ID=존재하지않는ID 조회")
+    not_found = repo.find_by_id("not-exist")
+    print(f"  -> {'None (정상)' if not_found is None else not_found}")
+
     # UPDATE
     print(f"\n[UPDATE] {order1.id} 상태를 PROCESSING으로 변경")
     updated = repo.update_status(order1.id, OrderStatus.PROCESSING)
