@@ -55,6 +55,11 @@ def demo_crud(repo: OrderRepository) -> None:
     if updated:
         print(f"  -> 변경 후 상태: {updated.status.value}")
 
+    # FIND BY STATUS
+    print(f"\n[FIND BY STATUS] pending 상태 주문 조회")
+    pending = repo.find_by_status(OrderStatus.PENDING)
+    print(f"  -> pending 주문 수: {len(pending)}건")
+
     # DELETE
     print(f"\n[DELETE] {order2.id} 삭제")
     deleted = repo.delete(order2.id)
